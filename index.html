@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <title>Password strength Check</title>
+</head>
+<body>
+  
+  <div class="box">
+    <h2 class="box__title">Password strength Check</h2>
+    <input type="password" class="box__password" id="password">
+    <div class="box__password-strength"></div>
+    <div class="box__password-strength"></div>
+    <div class="box__password-strength"></div>
+  </div>
+  <script>
+    const $ = el => document.querySelector(el)
+    const $inputElement = $('.box__password')
+    const $strength = document.querySelectorAll('.box__password-strength')
+
+    $inputElement.addEventListener('input',(event)=>{
+      let password = event.target.value
+      let strength = Math.min(password.length, 12)
+      let degree = strength * 30
+      let grasdienteColor = strength <= 4 ? '#ff2c1c' : (strength <= 8 ? '#ff9800' : '#12ff12')
+
+      $strength.forEach(strength=>{
+        strength.style.background = `conic-gradient(${grasdienteColor} ${degree}deg, #3335 ${degree}deg)`
+      })
+    })
+  </script>
+</body>
+</html>
